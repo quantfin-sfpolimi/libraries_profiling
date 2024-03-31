@@ -51,6 +51,7 @@ def historical_price_tingo(ticker):
         df.set_index(df["date"], inplace = True)
         return df["close"]
     return None
+
 def historical_intraday_tingo(ticker, frequency= False):
     """
 

@@ -67,6 +67,3 @@ def historical_intraday_yfinance(ticker, frequency=False):
     dataframe["close"] = dataframe["Adj Close"]
     
     return dataframe["close"]
-    
-    
-print(historical_intraday_yfinance("AAPL"))

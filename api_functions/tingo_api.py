@@ -87,5 +87,3 @@ def historical_intraday_tingo(ticker, frequency):
     
     return None
     
-
-print(historical_price_tingo("AAPL") )
