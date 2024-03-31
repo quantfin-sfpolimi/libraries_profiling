@@ -74,4 +74,3 @@ def historical_intraday_alpha_vantage(ticker, frequency):
     return None
   
 
-print(latest_price_alpha_vantage_2("AAPL") )

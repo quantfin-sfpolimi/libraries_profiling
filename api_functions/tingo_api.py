@@ -42,19 +42,23 @@ def historical_price_tingo(ticker):
     Returns:
         dataframe: dataframe with index datetime values and 1 column with adjusted closed price.
     """
+    end_date = datetime.today().strftime("%Y-%m-%d")
+    
     response = requests.get(
-        f'https://financialmodelingprep.com/api/v3/historical-price-full/{ticker}',
-         params=[("apikey",fmp_key)]
+        f'https://api.tiingo.com/tiingo/daily/{ticker}/prices?startDate=1000-1-1&endDate={end_date}',
+        headers={
+        
+        'Authorization' : "Token "+tingo_key,
+        }
     )
     
-    data = response.json()["historical"]
-    if data is not None:
-        df = pd.DataFrame(data)
-        df["date"] = pd.to_datetime(df["date"])
-        df.set_index(df["date"], inplace= True)
-        df.drop("date", inplace= True, axis = 1)
-        return df["adjClose"]
-    return None
+    data = response.json()
+    df = pd.DataFrame(data)
+    df["date"] =  (pd.to_datetime(df["date"]))
+    df.set_index(df["date"], inplace= True)
+    
+    
+    return df["close"]
 
 def historical_intraday_tingo(ticker, frequency):
     """
@@ -83,4 +87,5 @@ def historical_intraday_tingo(ticker, frequency):
     
     return None
     
-print( latest_price_tingo("AAPL") )
+
+print(historical_price_tingo("AAPL") )

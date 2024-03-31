@@ -4,7 +4,6 @@ from timeit import timeit
 
 fmp_key = "wpy0OAHOmFPLDyGbZzZ9IQuBlPMGf6v3"
 aplha_vantage_key = "P0FAXOA7EI26OK9C"
-quandl_key = "wcDkrxrYudTfwmW17yvF"
 tingo_key = "ef8c1728f6f1409157ab6a4f1266dd7af5df1ad5"
 yfinance_api = " "
 iex_key = "pk_5b65eb8e38e744f0b90e312a5c638d1b"
