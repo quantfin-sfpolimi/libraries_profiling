@@ -25,31 +25,35 @@ start = dt.datetime(2010,1,1)
 end = dt.date.today()
 
 #TINGO
-""" 
-Tingo has some problems with data reader, in order to fix them update pandas datareader by tiping in the terminal:
-pip install git+https://github.com/pydata/pandas-datareader.git
-"""
-
-tingo_df = pdr.tiingo.TiingoDailyReader(stock,start, end, api_key = tingo_key).read()
+def tingo_df(ticker, start, end, key):
+    dataframe = pdr.tiingo.TiingoDailyReader(ticker,start, end, api_key = key).read()
+    return dataframe
 
 #IEX CLOUD
-#function not working due to free plan (data available with upgraded premium plan)
-#df_iex = pdr.iex.daily.IEXDailyReader(stock, start, end, api_key = iex_key).read()
+def iex_pandas_data_reader(ticker, start, end, key):
+    dataframe = pdr.iex.daily.IEXDailyReader(ticker, start, end, api_key = key).read()
+    return dataframe
 
 #ALPHA VANTAGE
-"""
-df_alpha_vantage = pdr.av.time_series.AVTimeSeriesReader(stock, function='TIME_SERIES_DAILY',
+def alpha_vantage_pandas_data_reader(ticker, start, end, key):
+    dataframe = pdr.av.time_series.AVTimeSeriesReader(ticker, function='TIME_SERIES_DAILY',
                                                          start=start, end=end, 
-                                                         api_key=aplha_vantage_key).read()
-"""
-#QUANDL
-df_quandl = pdr.quandl.QuandlReader(stock, start=start, end=end,
-                                    api_key=quandl_key).read()
+                                                         api_key=key).read()
+    return dataframe
 
+#QUANDL
+def quandl_pandas_datareader(ticker, start, end, key):
+    dataframe =  pdr.quandl.QuandlReader(ticker, start=start, end=end,
+                                    api_key=key).read()
+    return dataframe
 
 #STOOQ
-df_stooq = pdr.stooq.StooqDailyReader(stock, start=start, end=end).read()
+def stooq_pandas_data_reader(ticker, start, end, key = None):
+    dataframe = pdr.stooq.StooqDailyReader(ticker, start=start, end=end).read()
+    return dataframe
 
 #YAHOO FINANCE
-df_yahoo = pdr_data.get_data_yahoo(stock, start, end)
-#used different name for pdf to solve integer /int problem with yfinance
+def yahoo_finance_pandas_data_reader(ticker, start, end, key = None):
+    dataframe = pdr_data.get_data_yahoo(ticker, start, end)
+    #used different name for pdf to solve integer /int problem with yfinance
+    return dataframe
