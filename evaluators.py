@@ -7,14 +7,9 @@ import datetime as dt
 import yfinance as yf
 yf.pdr_override()
 
-stock = "AAPL"
-start = dt.datetime(1800,1,1)
-end = dt.date.today()
 
-def yahoo_finance_pandas_data_reader(ticker, start, end, key = None):
-    dataframe = pdr_data.get_data_yahoo(ticker, start, end)
-    #used different name for pdf to solve integer /int problem with yfinance
-    return dataframe
+def prova_import():
+    print("Imported!")
 
 def time_response(api_function, stock, start, end):
     start_time = time.perf_counter()
@@ -24,4 +19,15 @@ def time_response(api_function, stock, start, end):
     
     return finish_time - start_time
 
-print(time_response(yahoo_finance_pandas_data_reader, stock, start, end) )
+def count_nan(dataframe_column):
+    
+    nan_values = dataframe_column.isna().sum()
+    return nan_values
+
+def get_longest_runnig(dataframe):
+    first_day = dataframe.iloc[-1]
+    last_day = dataframe.iloc[0]
+    
+    n_days = len(dataframe.index)
+    return first_day, last_day, n_days
+

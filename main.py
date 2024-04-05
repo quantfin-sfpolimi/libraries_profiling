@@ -1,6 +1,14 @@
 from helpers import *
 import requests
 from timeit import timeit
+import sys
+from alpha_vintage_api import * 
+
+
+sys.path.insert(0, '/api_functions/')
+
+
+from evaluators import *
 
 fmp_key = "wpy0OAHOmFPLDyGbZzZ9IQuBlPMGf6v3"
 aplha_vantage_key = "P0FAXOA7EI26OK9C"
@@ -11,7 +19,8 @@ eodhd_key = "660734df8f7450.97003170"
 fin_hub_key = "co3jcjpr01qj6vn80uogco3jcjpr01qj6vn80up0"
 finage_key = "API_KEY01UJ76AC66CG8HPDTMJ75CW2GWR8FY0A"
 
-
+prova_import()
+prova_imported_2()
 
 api_list = pd.Series(["Financial  Modelling Prep", "Alpha Vantage", "Quandl", "Tingo",
                       "YFinance", "IEX Cloud", "EODHD" ,"FinHub", "Finage"
@@ -19,12 +28,13 @@ api_list = pd.Series(["Financial  Modelling Prep", "Alpha Vantage", "Quandl", "T
 
 
 comparison_df = pd.DataFrame(index = api_list)
-comparison_df["Minimum Time Frame"] = " "
-comparison_df["Time Delay"] = 8
-comparison_df["Longest-running timeserie"] = dt.datetime(2010,1,1)
-comparison_df["Nan Value Rate"] = 0
-comparison_df["Error Rate"] = 0
-comparison_df["Max Free Calls"] = 0
+comparison_df["Last update of a quote price"] = " "
+comparison_df["Longest daily timeserie available"] = 8
+comparison_df["Minimum time frequency available"] = dt.datetime(2010,1,1)
+comparison_df["Nan values in a timeserie"] = 0
+comparison_df["Deviation from the average values in a timeserie"] = 0
+comparison_df["Time delay of the request"] = 0
+comparison_df["Minimum time frequency available"] = 0
 
 print(comparison_df)
 
