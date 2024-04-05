@@ -72,7 +72,7 @@ def historical_intraday_tingo(ticker, frequency):
     """
     response = requests.get(
         f'https://financialmodelingprep.com/api/v3/historical-chart/{frequency}/{ticker}',
-         params=[("apikey",fmp_key)]
+         params=[("apikey",tingo_key)]
     )
     
     data = response.json()

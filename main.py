@@ -12,7 +12,7 @@ fin_hub_key = "co3jcjpr01qj6vn80uogco3jcjpr01qj6vn80up0"
 finage_key = "API_KEY01UJ76AC66CG8HPDTMJ75CW2GWR8FY0A"
 
 
-"""
+
 api_list = pd.Series(["Financial  Modelling Prep", "Alpha Vantage", "Quandl", "Tingo",
                       "YFinance", "IEX Cloud", "EODHD" ,"FinHub", "Finage"
                     ])
@@ -26,15 +26,17 @@ comparison_df["Nan Value Rate"] = 0
 comparison_df["Error Rate"] = 0
 comparison_df["Max Free Calls"] = 0
 
-comparison_df
+print(comparison_df)
+
+
+
+
+
 """
-
-
-
-
-
 iterations = 100
 total_time = timeit("print(30)", number=iterations, globals=globals())
 
 average_time = total_time / iterations
 print(average_time)
+
+"""
