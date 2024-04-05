@@ -28,7 +28,6 @@ def pickle_dump(stocks_prices):
     with open("stocks_prices_dataframe.pkl", "wb") as f:
         pickle.dump(stocks_prices, f)
 
-
 def pickle_load(filename):
     """
     Unpickles and loads a pandas DataFrame from the specified file.
@@ -42,7 +41,6 @@ def pickle_load(filename):
     with open(filename, "rb") as f:
         stocks_prices = pickle.load(f)
     return stocks_prices
-
 
 def load_dataframe(years):
     """
@@ -63,40 +61,6 @@ def load_dataframe(years):
         stock_prices = loaded_df(years=years, tickers=tickers)
 
     return stock_prices, tickers
-
-
-def hashing_and_splitting(adj_close_df):
-    """
-    Splits the given DataFrame of adjusted close prices into training and testing sets based on checksum hashing.
-
-    Parameters:
-        adj_close_df (pandas.DataFrame): DataFrame containing adjusted close prices.
-
-    Returns:
-        Tuple[pandas.DataFrame, pandas.DataFrame]: A tuple containing the training and testing DataFrames.
-    """
-    checksum = np.array([crc32(v) for v in adj_close_df.index.values])
-    test_ratio = 0.2
-    test_indices = checksum < test_ratio * 2 ** 32
-    return adj_close_df[~test_indices], adj_close_df[test_indices]
-
-
-def get_stockex_tickers(link):
-    """
-    Retrieves ticker symbols from a Wikipedia page containing stock exchange information.
-
-    Parameters:
-        link (str): Link to the Wikipedia page containing stock exchange information.
-
-    Returns:
-        List[str]: List of ticker symbols.
-    """
-    tables = pd.read_html(link)
-    df = tables[4]
-    df.drop(['Company', 'GICS Sector', 'GICS Sub-Industry'], axis=1, inplace=True)
-    tickers = df['Ticker'].values.tolist()
-    return tickers
-
 
 def loaded_df(years, tickers):
     """
@@ -123,7 +87,6 @@ def loaded_df(years, tickers):
     pickle_dump(stocks_prices=stocks_prices)
     return stocks_prices
 
-
 def clean_df(percentage, tickers, stocks_prices):
     """
     Cleans the DataFrame by dropping stocks with NaN values exceeding the given percentage threshold.
@@ -146,56 +109,3 @@ def clean_df(percentage, tickers, stocks_prices):
                 stocks_prices.drop(ticker, axis=1, inplace=True)
     return stocks_prices
 
-
-def xtrain_ytrain(adj_close_df):
-    """
-    Splits the DataFrame into training and testing sets, normalizes the data, and prepares it for LSTM model training.
-
-    Parameters:
-        adj_close_df (pandas.DataFrame): DataFrame containing adjusted close prices.
-
-    Returns:
-        Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, MinMaxScaler]: A tuple containing training and testing data along with the scaler.
-    """
-    split_index = int((len(adj_close_df)) * 0.80)
-    train_set = pd.DataFrame(adj_close_df.iloc[0:split_index])
-    test_set = pd.DataFrame(adj_close_df.iloc[split_index:])
-
-    sc = MinMaxScaler(feature_range=(0, 1))
-    sc.fit(train_set)
-    training_set_scaled = sc.fit_transform(train_set)
-    test_set_scaled = sc.transform(test_set)
-
-    xtrain = []
-    ytrain = []
-    for i in range(60, training_set_scaled.shape[0]):
-        xtrain.append(training_set_scaled[i - 60:i, 0])
-        ytrain.append(training_set_scaled[i, 0])
-    xtrain, ytrain = np.array(xtrain), np.array(ytrain)
-    xtrain = np.reshape(xtrain, (xtrain.shape[0], xtrain.shape[1], 1))
-
-    xtest = []
-    ytest = []
-    for i in range(20, test_set_scaled.shape[0]):
-        xtest.append(test_set_scaled[i - 20:i, 0])
-        ytest.append(test_set_scaled[i, 0])
-    xtest, ytest = np.array(xtest), np.array(ytest)
-    return xtrain, ytrain, xtest, ytest, sc
-
-
-def lstm_model(xtrain, ytrain):
-    """
-    Builds and trains an LSTM model using the training data.
-
-    Parameters:
-        xtrain (np.ndarray): Input training data.
-        ytrain (np.ndarray): Target training data.
-
-    Returns:
-        Sequential: Trained LSTM model.
-    """
-    model = Sequential()
-    model.add(LSTM(units=50, activation='relu', return_sequences=True, input_shape=(xtrain.shape[1], 1)))
-    model.add(Dropout(0.2))
-    model.add(LSTM(units=60, activation='relu', return_sequences=True))
-    model.add
