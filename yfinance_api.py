@@ -5,7 +5,26 @@ from datetime import datetime
 import pandas as pd
 from pandas_datareader import data as pdr
 yf.pdr_override()
+"""
+    “1m”, “2m”, “5m”, “15m”, “30m”, “60m”, “90m”, “1h”, “1d”, “5d”, “1wk”, “1mo”, “3mo”
+    
+    
+    """
 
+def latest_price_yfinance_2(ticker):
+    
+    end_date = datetime.today()
+    start_date = datetime(1000,1,1)
+    dataframe =  yf.download(ticker,start_date,end_date)
+    
+    
+    price = dataframe["Close"].iloc[-1]
+    timestamp_price = datetime.timestamp(dataframe.index[0] )
+    
+    delay = datetime.timestamp(datetime.now()) - timestamp_price
+    print("\n\n\n")
+    return price, delay
+    
 def latest_price_yfinance(ticker):
     """
     Args:
@@ -40,6 +59,10 @@ def historical_price_yfinance(ticker):
     
     return dataframe["close"]
     
+def historical_price_yfinance_2(ticker):
+    dataframe = yf.Historic
+
+
 def historical_intraday_yfinance(ticker, frequency=False):
     """
 
@@ -66,3 +89,8 @@ def historical_intraday_yfinance(ticker, frequency=False):
     
     return dataframe["close"]
 
+
+company = yf.Ticker("AAPL")
+print(company.info["currentPrice"])
+
+print(company.info)

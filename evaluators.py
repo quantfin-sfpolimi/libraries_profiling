@@ -11,10 +11,10 @@ yf.pdr_override()
 def prova_import():
     print("Imported!")
 
-def time_response(api_function, stock, start, end):
+def time_response(function_to_evaluate, stock = None, start = None, end = None, key = None):
     start_time = time.perf_counter()
     
-    api_function(stock, start, end)
+    function_to_evaluate(stock, start, end)
     finish_time = time.perf_counter()
     
     return finish_time - start_time
@@ -30,4 +30,3 @@ def get_longest_runnig(dataframe):
     
     n_days = len(dataframe.index)
     return first_day, last_day, n_days
-

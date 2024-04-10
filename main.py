@@ -1,14 +1,16 @@
-from helpers import *
 import requests
 from timeit import timeit
 import sys
-from alpha_vintage_api import * 
-
+from api_alpha_vintage import * 
+from api_eodhd import *
+from evaluators import *
+from api_finhub import *
+from api_fmp import *
+from helpers import *
+from pandas_datareader_api import *
 
 sys.path.insert(0, '/api_functions/')
 
-
-from evaluators import *
 
 fmp_key = "wpy0OAHOmFPLDyGbZzZ9IQuBlPMGf6v3"
 aplha_vantage_key = "P0FAXOA7EI26OK9C"
@@ -23,8 +25,11 @@ prova_import()
 prova_imported_2()
 
 api_list = pd.Series(["Financial  Modelling Prep", "Alpha Vantage", "Quandl", "Tingo",
-                      "YFinance", "IEX Cloud", "EODHD" ,"FinHub", "Finage"
+                      "YFinance", "IEX Cloud", "EODHD" ,"FinHub", "Finage", "Market Stack", "Poligon.io"
                     ])
+
+
+time_response(prova_import)
 
 
 comparison_df = pd.DataFrame(index = api_list)

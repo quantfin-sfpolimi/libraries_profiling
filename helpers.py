@@ -14,7 +14,6 @@ from zlib import crc32
 
 history = History()  # Ignore, it helps with model_data function
 
-
 def pickle_dump(stocks_prices):
     """
     Pickles the given pandas DataFrame containing stock prices into a file named "stocks_prices_dataframe.pkl".
