@@ -1,1 +1,8 @@
-
+pandas
+numpy
+datetime
+requests
+time
+yfinance
+finhub
+pandas_datareader
