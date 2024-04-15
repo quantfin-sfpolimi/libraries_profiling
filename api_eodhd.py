@@ -7,13 +7,13 @@ eodhd_key = "660734df8f7450.97003170"
 
 
 def latest_price_eodhd(ticker):
-    """
+    """Get latest quote of a given ticker
+
     Args:
-        ticker (string): ticker of the selected stock
+        ticker (strg): desired ticker. It can be stock, index of anything in a financial market.
 
     Returns:
-        float: current price of the selected stock
-        float: delay (seconds) between now and the moment the stock price was registered
+        json object: data of the quote (current price, high, low...)
     """
     
     response = requests.get(
@@ -24,13 +24,14 @@ def latest_price_eodhd(ticker):
     return data
 
 def historical_price_eodhd(ticker):
-    """
+    """Get historical data of a given ticker
 
     Args:
-        ticker (string): ticker of the selected stock
+        ticker (strg): desider ticker
 
     Returns:
-        dataframe: dataframe with index datetime values and 1 column with adjusted closed price.
+        pandas dataframe: dataframe containing all data available for free.
+        None if the data is not available with the free plan.
     """
     
     
@@ -44,7 +45,7 @@ def historical_price_eodhd(ticker):
         df = pd.DataFrame(data)
         df["date"] = pd.to_datetime(df["date"])
         df.set_index(df["date"], inplace = True)
-        return df["close"]
+        return df
     return None
 
 def historical_intraday_eodhd(ticker, frequency= False):
@@ -55,18 +56,18 @@ def historical_intraday_eodhd(ticker, frequency= False):
         frequency (string): time frequency of the price. values: ["1min","5min" "15min", "30min", "1hour", "4hour"]
 
     Returns:
-        pandas dataframe: dataframe: dataframe with index datetime values and 1 column with adjusted closed price.
-        none if the data is not available with the free plan.
+        pandas dataframe: dataframe: dataframe containing all data available for free.
+        None if the data is not available with the free plan.
     """
     response = requests.get(
         f'https://eodhd.com/api/intraday/{ticker}?interval={frequency}api_token={eodhd_key}&fmt=json'
     )
-    return response.url
-    try:
-        data = response.url()
-    except:
-        return None
-    return data    
+    data = response.json()
+    if data is not None:
+        df = pd.DataFrame(data)
+        
+        return df
+    return None
     
     
     

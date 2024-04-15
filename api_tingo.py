@@ -8,13 +8,13 @@ tingo_key = "ef8c1728f6f1409157ab6a4f1266dd7af5df1ad5"
 
 
 def latest_price_tingo(ticker):
-    """
+    """Get latest quote of a given ticker
+
     Args:
-        ticker (string): ticker of the selected stock
+        ticker (strg): desired ticker. It can be stock, index of anything in a financial market.
 
     Returns:
-        float: current price of the selected stock
-        float: delay (seconds) between now and the moment the stock price was registered
+        json object: data of the quote (current price, high, low...)
     """
     
     response = requests.get(
@@ -34,13 +34,14 @@ def latest_price_tingo(ticker):
     return  price, delay
 
 def historical_price_tingo(ticker):
-    """
+    """Get historical data of a given ticker
 
     Args:
-        ticker (string): ticker of the selected stock
+        ticker (strg): desider ticker
 
     Returns:
-        dataframe: dataframe with index datetime values and 1 column with adjusted closed price.
+        pandas dataframe: dataframe containing all data available for free.
+        None if the data is not available with the free plan.
     """
     end_date = datetime.today().strftime("%Y-%m-%d")
     
@@ -58,5 +59,5 @@ def historical_price_tingo(ticker):
     df.set_index(df["date"], inplace= True)
     
     
-    return df["close"]
+    return df
 

@@ -8,9 +8,6 @@ import yfinance as yf
 yf.pdr_override()
 
 
-def prova_import():
-    print("Imported!")
-
 def time_response(function_to_evaluate, stock = None, start = None, end = None, key = None):
     start_time = time.perf_counter()
     

@@ -5,13 +5,13 @@ import pandas as pd
 fmp_key = "wpy0OAHOmFPLDyGbZzZ9IQuBlPMGf6v3"
 
 def latest_price_fmp(ticker):
-    """
+    """Get latest quote of a given ticker
+
     Args:
-        ticker (string): ticker of the selected stock
+        ticker (strg): desired ticker. It can be stock, index of anything in a financial market.
 
     Returns:
-        float: current price of the selected stock
-        float: delay (seconds) between now and the moment the stock price was registered
+        json object: data of the quote (current price, high, low...)
     """
     
     response = requests.get(
@@ -24,13 +24,15 @@ def latest_price_fmp(ticker):
     return data
 
 def historical_price_fmp(ticker,start ="1900-1-1", end="2024-2-2"):
-    """
+    """Get historical data of a given ticker
 
     Args:
-        ticker (string): ticker of the selected stock
+        ticker (string): desired ticker
+        start (str, optional): start day. Defaults to "1900-1-1".
+        end (str, optional): end day. Defaults to "2024-2-2".
 
     Returns:
-        dataframe: dataframe with index datetime values and 1 column with adjusted closed price.
+        json obect: Json object with list of json object (one for each index)
     """
     response = requests.get(
         f'https://financialmodelingprep.com/api/v3/historical-price-full/{ticker}?from={start}&to={end}',
@@ -41,14 +43,16 @@ def historical_price_fmp(ticker,start ="1900-1-1", end="2024-2-2"):
     return data
 
 def historical_intraday_fmp(ticker, frequency,  start ="2020-1-1", end="2024-2-2"):
-    """
+    """Get historical data of a given ticker with the possibility to set different frequency.
 
     Args:
-        ticker (string): _description_
-        frequency (string): time frequency of the price. values: ["1min","5min" "15min", "30min", "1hour", "4hour"]
+        ticker (str): desired ticker
+        frequency (str): desired frequency. (1min, 5min, 15min, 30min, 1hour, 4hour)
+        start (str, optional): start. Defaults to "2020-1-1".
+        end (str, optional): end. Defaults to "2024-2-2".
 
     Returns:
-        pandas dataframe: dataframe: dataframe with index datetime values and 1 column with adjusted closed price.
+        _type_: _description_
     """
     response = requests.get(
         f'https://financialmodelingprep.com/api/v3/historical-chart/{frequency}/{ticker}?from={start}&to={end}',
@@ -67,3 +71,4 @@ def historical_intraday_fmp(ticker, frequency,  start ="2020-1-1", end="2024-2-2
     
     return None
     
+print(historical_price_fmp("AAPL") )
