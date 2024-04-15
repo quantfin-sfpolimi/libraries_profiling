@@ -7,34 +7,16 @@ Our study assesses each API across multiple metrics, including response time, er
 
 
 ## Code structure
-api_functionspy: This folder contains a python script for each API we evaluated. Each script has three function with the same input/output values  in order to have stardard methods to compare APIs.
-helpers.py: This small file contains some methods that can be useful to clean, pickle and load dataframe.
 evalutators.py: This file contains all the functions used in main.py to evalute APIs.
-main.py: The mail file contains the process and the calculations we used to compare the APIs as we will describe in README.
+
+lib_profilying.ipynb: this notebooks contains all the calculations, the code and the results of the study. You can run the notebook to replicate the study with different parameters.
+
 README.md: This file, providing an overview of the project and instructions.
+
+For each api we evaluted, there is a python script containing some useful methods to make the calls.
 
 Usage to replicate this script:
 
 Install the required Python libraries listed in `requirements.txt`.
 
-Execute the main.py `script`.
-
-## Performance metrics
-As we said before, we focused on different performance metrics for different usages.
-If not clearly specified, we will consider only APIs that offer free access to their data.
-This is the list of parameters and features we are going to discuss and evaluate.
-
-<ul> 
-    <li>Last update of a quote price</li>
-    <li>Longest daily timeserie available</li>
-    <li>Minimum time frequency available </li>
-    <li>Nan values in a timeserie</li>
-    <li>Deviation from the average values in a timeserie</li>
-    <li>Time delay of the request </li>
-    <li>Minimum time frequency available </li>
-
-</ul>
-
-In main.py we will create a simple dataframe containing in the rows all the api or libraries we will consider and in the columns all the parameters we previously mentioned in order to have a overview of the comparison and in order to be able to filter specific caratteristics.
-
-
+Run the notebook `lib_profiling.ipynb`.
