@@ -60,30 +60,3 @@ def historical_price_tingo(ticker):
     
     return df["close"]
 
-def historical_intraday_tingo(ticker, frequency):
-    """
-
-    Args:
-        ticker (string): _description_
-        frequency (string): time frequency of the price. values: ["1min","5min" "15min", "30min", "1hour", "4hour"]
-
-    Returns:
-        pandas dataframe: dataframe: dataframe with index datetime values and 1 column with adjusted closed price.
-    """
-    response = requests.get(
-        f'https://financialmodelingprep.com/api/v3/historical-chart/{frequency}/{ticker}',
-         params=[("apikey",tingo_key)]
-    )
-    
-    data = response.json()
-    if data is not None:
-        
-        df = pd.DataFrame(data)
-        
-        df["date"] = pd.to_datetime(df["date"])
-        df.set_index(df["date"], inplace= True)
-        df.drop("date", inplace= True, axis = 1)
-        return df["close"]
-    
-    return None
-    

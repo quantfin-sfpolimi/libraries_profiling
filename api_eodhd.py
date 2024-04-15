@@ -6,7 +6,7 @@ import pandas as pd
 eodhd_key = "660734df8f7450.97003170"
 
 
-def latest_price_tingo(ticker):
+def latest_price_eodhd(ticker):
     """
     Args:
         ticker (string): ticker of the selected stock
@@ -23,7 +23,7 @@ def latest_price_tingo(ticker):
     data = response.json()
     return data
 
-def historical_price_tingo(ticker):
+def historical_price_eodhd(ticker):
     """
 
     Args:
@@ -32,7 +32,7 @@ def historical_price_tingo(ticker):
     Returns:
         dataframe: dataframe with index datetime values and 1 column with adjusted closed price.
     """
-    end_date = datetime.today().strftime("%Y-%m-%d")
+    
     
     response = requests.get(
         f'https://eodhd.com/api/eod/{ticker}?api_token={eodhd_key}&fmt=json'
@@ -47,7 +47,7 @@ def historical_price_tingo(ticker):
         return df["close"]
     return None
 
-def historical_intraday_tingo(ticker, frequency= False):
+def historical_intraday_eodhd(ticker, frequency= False):
     """
 
     Args:
@@ -59,16 +59,15 @@ def historical_intraday_tingo(ticker, frequency= False):
         none if the data is not available with the free plan.
     """
     response = requests.get(
-        f'https://eodhd.com/api/intraday/{ticker}?&interval={ticker}api_token={eodhd_key}&fmt=json'
+        f'https://eodhd.com/api/intraday/{ticker}?interval={frequency}api_token={eodhd_key}&fmt=json'
     )
+    return response.url
     try:
         data = response.url()
     except:
         return None
     return data    
     
-def prova_import():
-    print("Prova Import")
     
     
-print(historical_price_tingo("AAPL"))
+print(historical_price_eodhd("AAPL"))

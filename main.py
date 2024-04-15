@@ -7,7 +7,7 @@ from evaluators import *
 from api_finhub import *
 from api_fmp import *
 from helpers import *
-from pandas_datareader_api import *
+from api_pandas_datareader import *
 
 sys.path.insert(0, '/api_functions/')
 

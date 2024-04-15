@@ -14,10 +14,10 @@ def prova_import():
 def time_response(function_to_evaluate, stock = None, start = None, end = None, key = None):
     start_time = time.perf_counter()
     
-    function_to_evaluate(stock, start, end)
+    function_to_evaluate(stock)
     finish_time = time.perf_counter()
     
-    return finish_time - start_time
+    return (finish_time - start_time)
 
 def count_nan(dataframe_column):
     

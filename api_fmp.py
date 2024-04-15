@@ -23,7 +23,7 @@ def latest_price_fmp(ticker):
     
     return data
 
-def historical_price_fmp(ticker, frequency = "1min",start ="2020-1-1", end="2024-2-2"):
+def historical_price_fmp(ticker,start ="1900-1-1", end="2024-2-2"):
     """
 
     Args:
@@ -67,6 +67,3 @@ def historical_intraday_fmp(ticker, frequency,  start ="2020-1-1", end="2024-2-2
     
     return None
     
-
-
-print(historical_price_fmp("AAPL"))
