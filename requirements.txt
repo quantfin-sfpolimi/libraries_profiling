@@ -2,7 +2,8 @@ pandas
 numpy
 datetime
 requests
-time
+timeit
 yfinance
 finhub
 pandas_datareader
+sys

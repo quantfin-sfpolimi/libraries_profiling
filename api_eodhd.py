@@ -71,4 +71,3 @@ def historical_intraday_eodhd(ticker, frequency= False):
     
     
     
-print(historical_price_eodhd("AAPL"))
