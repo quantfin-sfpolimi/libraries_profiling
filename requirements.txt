@@ -7,3 +7,4 @@ yfinance
 finhub
 pandas_datareader
 sys
+math
