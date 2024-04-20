@@ -8,3 +8,4 @@ finhub
 pandas_datareader
 sys
 math
+warnings
