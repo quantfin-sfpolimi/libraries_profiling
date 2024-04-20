@@ -3,7 +3,7 @@ Data is the foundamental brick of any financial study and project so, before get
 
 This paper presents a systematic evaluation of various open-source financial APIs, aiming to provide clarity and guidance to developers and researchers seeking to integrate financial data into their Python projects.
 
-Our study assesses each API across multiple metrics, including response time, error handling, handling of null values and data cost. By rigorously analyzing these factors, we offer an objective comparison to aid users in selecting the optimal API for their and our specific requirements.
+Our study assesses each API across multiple metrics, including response time, error handling and data cost. By rigorously analyzing these factors, we offer an objective comparison to aid users in selecting the optimal API for their and our specific requirements.
 
 
 ## Code structure
