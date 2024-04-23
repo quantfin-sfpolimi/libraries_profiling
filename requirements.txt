@@ -1,1 +1,11 @@
-
+pandas
+numpy
+datetime
+requests
+timeit
+yfinance
+finhub
+pandas_datareader
+sys
+math
+warnings
