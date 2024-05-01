@@ -20,3 +20,5 @@ Usage to replicate this script:
 Install the required Python libraries listed in `requirements.txt`.
 
 Run the notebook `lib_profiling.ipynb`.
+
+Check out bibliography.md file to see our sources.
